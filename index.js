@@ -4,6 +4,7 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
 const flash = require('connect-flash');
+let noticias = require('./noticias.json');
 
 var handle = exphbs.create({
     defaultLayout: 'main'
@@ -61,7 +62,7 @@ app.use((req, res, next) => {
   });
 
 app.get('/', function(req,res){
-    res.render('index');
+    res.render('index', {noticias: noticias});
 })
 
 app.listen(3000, function(){
