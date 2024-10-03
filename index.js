@@ -118,6 +118,7 @@ function adicionarNoticia(titulo, descricao, imagem) {
             console.error('Erro ao salvar o arquivo JSON', err);
             return;
         }
+        res.redirect('/');
     });
 }
 
