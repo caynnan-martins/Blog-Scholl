@@ -1,0 +1,17 @@
+<div class="container mt-5">
+        <h1>Notícias</h1>
+        <div class="row">
+            {{#each noticias}}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img src="{{this.imagem}}" class="card-img-top" alt="{{this.titulo}}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{this.titulo}}</h5>
+                            <p class="card-text">{{this.descricao}}</p>
+                            <p class="card-text"><small class="text-muted">{{this.data}}</small></p>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+</div>

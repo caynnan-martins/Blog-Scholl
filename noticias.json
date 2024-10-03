@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "titulo": "Lançamento do Novo Smartphone da Marca X",
+        "descricao": "A Marca X lançou seu novo smartphone com recursos inovadores que prometem revolucionar o mercado.",
+        "imagem": "https://example.com/imagens/smartphone.jpg",
+        "data": "2024-10-01"
+    },
+    {
+        "id": 2,
+        "titulo": "Abertura da Nova Exposição de Arte Moderna",
+        "descricao": "A nova exposição de arte moderna será inaugurada este fim de semana, trazendo obras de artistas renomados.",
+        "imagem": "https://example.com/imagens/exposicao.jpg",
+        "data": "2024-10-02"
+    },
+    {
+        "id": 3,
+        "titulo": "Avanços na Pesquisa de Vacinas contra o Vírus Y",
+        "descricao": "Pesquisadores anunciaram novos avanços em vacinas que podem ser eficazes contra o Vírus Y, trazendo esperança para milhões.",
+        "imagem": "https://example.com/imagens/vacina.jpg",
+        "data": "2024-10-03"
+    },
+    {
+        "id": 4,
+        "titulo": "Conferência Internacional sobre Sustentabilidade",
+        "descricao": "A conferência abordará questões de sustentabilidade e inovação em várias indústrias, reunindo especialistas de todo o mundo.",
+        "imagem": "https://example.com/imagens/conferencia.jpg",
+        "data": "2024-10-04"
+    },
+    {
+        "id": 5,
+        "titulo": "Descoberta de Nova Espécie de Peixe em Água Doce",
+        "descricao": "Cientistas descobriram uma nova espécie de peixe em um rio da Amazônia, aumentando a diversidade da fauna aquática.",
+        "imagem": "https://example.com/imagens/peixe.jpg",
+        "data": "2024-10-05"
+    }
+]
