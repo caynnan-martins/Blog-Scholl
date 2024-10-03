@@ -1,0 +1,8 @@
+[
+    {
+        "nome": "Admin",
+        "user": "admin",
+        "senha": "1234",
+        "avatar": "./assets/icons/caynnan.gif"
+    }
+]
