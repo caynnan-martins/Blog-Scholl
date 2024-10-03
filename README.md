@@ -19,3 +19,7 @@ Este é um projeto de blog desenvolvido para estudo, utilizando Node.js, Express
 ## Pré-requisitos
 
 Antes de começar, você precisará ter o Node.js e o npm instalados em sua máquina. Você pode baixá-los em [nodejs.org](https://nodejs.org/).
+
+## Acesso
+Usuario: `admin`
+Senha: `1234`
