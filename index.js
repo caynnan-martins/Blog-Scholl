@@ -101,6 +101,10 @@ app.get('/', function (req, res) {
 
 function adicionarNoticia(titulo, descricao, imagem) {
 
+    if(!req.session?.user?.logado){
+        return res.redirect('/');
+    }
+
     const novaNoticia = {
         titulo: titulo,
         descricao: descricao,
