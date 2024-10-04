@@ -118,7 +118,6 @@ function adicionarNoticia(titulo, descricao, imagem) {
             console.error('Erro ao salvar o arquivo JSON', err);
             return;
         }
-        res.redirect('/');
     });
 }
 
@@ -134,7 +133,7 @@ app.post('/noticia', (req, res) => {
 
     adicionarNoticia(titulo, desc, img); // Passa os parâmetros corretos
     req.flash('success_msg', 'Notícia adicionada com sucesso!');
-    return res.redirect('/dashboard');
+    return res.redirect('/');
 });
 
 // Inicia o servidor
