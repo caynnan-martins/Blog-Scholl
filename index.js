@@ -101,10 +101,6 @@ app.get('/', function (req, res) {
 
 function adicionarNoticia(titulo, descricao, imagem) {
 
-    if(!req.session?.user?.logado){
-        return res.redirect('/');
-    }
-
     const novaNoticia = {
         titulo: titulo,
         descricao: descricao,
@@ -132,6 +128,10 @@ app.post('/noticia', (req, res) => {
     if (!titulo || !desc || !img) { // Corrigido para verificar todos os campos
         req.flash('error_msg', 'Preencha todos os campos!');
         return res.redirect('/dashboard');
+    }
+
+    if(!req.session?.user?.logado){
+        return res.redirect('/');
     }
 
     req.flash('success_msg', 'Notícia adicionada com sucesso!');
