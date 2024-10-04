@@ -1,17 +1,42 @@
 <div class="container mt-5">
-        <h1>Notícias</h1>
-        <div class="row">
-            {{#each noticias}}
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src={{this.imagem}} class="card-img-top" alt="{{this.titulo}}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{this.titulo}}</h5>
-                            <p class="card-text">{{this.descricao}}</p>
-                            <p class="card-text"><small class="text-muted">{{this.data}}</small></p>
-                        </div>
+    <h1>Notícias</h1>
+    <div class="row" id="noticias-container">
+        {{#each noticias}}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="{{this.imagem}}" class="card-img-top" alt="{{this.titulo}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.titulo}}</h5>
+                        <p class="card-text">{{this.descricao}}</p>
+                        <p class="card-text"><small class="text-muted">{{this.data}}</small></p>
                     </div>
                 </div>
-            {{/each}}
-        </div>
+            </div>
+        {{/each}}
+    </div>
 </div>
+<script>
+    const socket = io();
+
+    // Escutar por novas notícias e adicioná-las dinamicamente ao container
+    socket.on('nova-noticia', (noticia) => {
+        const container = document.getElementById('noticias-container');
+
+        // Criar o novo card da notícia
+        const novaNoticiaHTML = `
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="${noticia.imagem}" class="card-img-top" alt="${noticia.titulo}">
+                    <div class="card-body">
+                        <h5 class="card-title">${noticia.titulo}</h5>
+                        <p class="card-text">${noticia.descricao}</p>
+                        <p class="card-text"><small class="text-muted">${new Date(noticia.data).toLocaleString()}</small></p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Adicionar o novo card ao container de notícias
+        container.insertAdjacentHTML('beforeend', novaNoticiaHTML);
+    });
+</script>

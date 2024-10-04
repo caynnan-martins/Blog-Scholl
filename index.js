@@ -4,9 +4,15 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
 const flash = require('connect-flash');
-const fs = require('fs'); // Importa o módulo fs
+const fs = require('fs');
 let noticias = require('./noticias.json');
 let usuarios = require('./usuarios.json');
+
+// Adicione o http e socket.io
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require('socket.io');
+const io = new Server(server);
 
 var handle = exphbs.create({
     defaultLayout: 'main'
@@ -18,8 +24,8 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.use(express.json()); // Para dados JSON
-app.use(express.urlencoded({ extended: true })); // Para dados URL-encoded
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: true })); 
 app.engine('handlebars', handle.engine);
 app.set('view engine', 'handlebars');
 app.use(express.static(path.join(__dirname, "public")));
@@ -65,7 +71,7 @@ app.post('/login', (req, res) => {
 app.get('/logout', (req, res) => {
     req.session.destroy((err) => {
         if (err) {
-            return res.redirect('/dashboard'); // Se houver erro, redireciona de volta ao dashboard
+            return res.redirect('/dashboard');
         }
         res.redirect('/');
     });
@@ -105,27 +111,27 @@ function adicionarNoticia(titulo, descricao, imagem) {
         titulo: titulo,
         descricao: descricao,
         imagem: imagem,
-        data: new Date().toISOString() // Data atual no formato ISO
+        data: new Date().toISOString()
     };
 
-    // Adiciona a nova notícia ao array de notícias
     noticias.push(novaNoticia);
     
-    // Salva o array modificado de volta no arquivo JSON
     fs.writeFile('./noticias.json', JSON.stringify(noticias, null, 2), (err) => {
         if (err) {
             console.error('Erro ao salvar o arquivo JSON', err);
             return;
         }
     });
-}
 
+    // Emitir a nova notícia para todos os clientes conectados
+    io.emit('nova-noticia', novaNoticia);
+}
 
 // Rota para adicionar notícia
 app.post('/noticia', (req, res) => {
     const { titulo, desc, img } = req.body;
 
-    if (!titulo || !desc || !img) { // Corrigido para verificar todos os campos
+    if (!titulo || !desc || !img) {
         req.flash('error_msg', 'Preencha todos os campos!');
         return res.redirect('/dashboard');
     }
@@ -135,11 +141,11 @@ app.post('/noticia', (req, res) => {
     }
 
     req.flash('success_msg', 'Notícia adicionada com sucesso!');
-    adicionarNoticia(titulo, desc, img); // Passa os parâmetros corretos
+    adicionarNoticia(titulo, desc, img);
     return res.redirect('/dashboard')
 });
 
-// Inicia o servidor
-app.listen(3000, function () {
+// Inicializando o servidor com Socket.io
+server.listen(3000, function () {
     console.log('[+] Servidor rodando na porta 3000');
 });
